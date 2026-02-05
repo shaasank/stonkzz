@@ -60,7 +60,7 @@ export function FeaturesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="glass-card-hover p-6"
+            className="glass-card p-6"
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -78,7 +78,7 @@ export function FeaturesSection() {
               <span>Strongly Bullish</span>
             </div>
             <div className="h-2 rounded-full bg-gradient-to-r from-loss via-neutral to-gain relative">
-              <motion.div 
+              <motion.div
                 className="absolute left-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-foreground rounded-full border-2 border-loss shadow-lg"
                 initial={{ left: '50%' }}
                 whileInView={{ left: '0%' }}
@@ -96,7 +96,7 @@ export function FeaturesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="glass-card-hover p-6"
+            className="glass-card p-6"
           >
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
@@ -114,9 +114,8 @@ export function FeaturesSection() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.3 + index * 0.05 }}
-                  className={`p-3 rounded-lg text-center transition-all duration-300 hover:scale-105 ${
-                    stock.positive ? 'bg-gain/20 text-gain border border-gain/20' : 'bg-loss/20 text-loss border border-loss/20'
-                  }`}
+                  className={`p-3 rounded-lg text-center transition-all duration-300 hover:scale-105 ${stock.positive ? 'bg-gain/20 text-gain border border-gain/20' : 'bg-loss/20 text-loss border border-loss/20'
+                    }`}
                 >
                   <p className="font-semibold text-sm">{stock.name}</p>
                   <p className="text-xs">{stock.change}</p>
@@ -142,7 +141,7 @@ export function FeaturesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="glass-card-hover p-6"
+            className="glass-card p-6"
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -194,7 +193,7 @@ export function FeaturesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="glass-card-hover p-6"
+            className="glass-card p-6"
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -232,7 +231,7 @@ export function FeaturesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5 }}
-            className="glass-card-hover p-6"
+            className="glass-card p-6"
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -251,7 +250,7 @@ export function FeaturesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.6 }}
-            className="glass-card-hover p-6"
+            className="glass-card p-6"
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -261,8 +260,8 @@ export function FeaturesSection() {
             </div>
             <div className="space-y-3">
               {keyStocks.map((stock, index) => (
-                <motion.div 
-                  key={stock.name} 
+                <motion.div
+                  key={stock.name}
                   className="flex items-center justify-between p-3 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors border border-transparent hover:border-primary/20"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -284,7 +283,7 @@ export function FeaturesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.7 }}
-            className="lg:col-span-3 glass-card-hover p-6"
+            className="lg:col-span-3 glass-card p-6"
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -294,8 +293,8 @@ export function FeaturesSection() {
             </div>
             <div className="grid md:grid-cols-2 gap-3">
               {newsBulletin.map((news, index) => (
-                <motion.div 
-                  key={index} 
+                <motion.div
+                  key={index}
                   className="flex items-start gap-3 p-3 rounded-lg bg-secondary/30 hover:bg-secondary/50 transition-colors border border-transparent hover:border-primary/20"
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}

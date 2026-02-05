@@ -78,7 +78,7 @@ export function CoursesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="glass-card-hover p-6"
+              className="glass-card p-6"
             >
               <div className="flex items-start gap-4">
                 <div className="w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">

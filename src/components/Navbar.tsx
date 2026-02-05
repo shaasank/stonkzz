@@ -2,14 +2,24 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { supabase } from '@/lib/supabase';
+import { AuthModal } from './AuthModal';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const navLinks = [
+  { label: 'AI Analysis', href: '/ai' },
   { label: 'How it Works', href: '#how-it-works' },
   { label: 'Features', href: '#features' },
   { label: 'Testimonials', href: '#testimonials' },
   { label: 'Pricing', href: '#pricing' },
-  { 
-    label: 'Courses', 
+  {
+    label: 'Courses',
     href: '#courses',
     submenu: [
       { label: 'Stock Market Basics', href: '#courses' },
@@ -25,6 +35,19 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
+  // Auth temporarily disabled per user request
+  // const [user, setUser] = useState<User | null>(null);
+
+  //   const {
+  //     data: { subscription },
+  //   } = supabase.auth.onAuthStateChange((_event, session) => {
+  //     setUser(session?.user ?? null);
+  //   });
+
+  //   return () => subscription.unsubscribe();
+  // }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,11 +69,10 @@ export function Navbar() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled 
-          ? 'bg-background/90 backdrop-blur-xl border-b border-border/50' 
-          : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
+        ? 'bg-background/90 backdrop-blur-xl border-b border-border/50'
+        : 'bg-transparent'
+        }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 lg:h-20">
@@ -65,21 +87,21 @@ export function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
-              <div 
-                key={link.label} 
+              <div
+                key={link.label}
                 className="relative"
                 onMouseEnter={() => link.submenu && setActiveSubmenu(link.label)}
                 onMouseLeave={() => setActiveSubmenu(null)}
               >
-                <button
-                  onClick={() => scrollToSection(link.href)}
+                <a
+                  href={link.href}
                   className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1 relative group"
                 >
                   {link.label}
                   {link.submenu && <ChevronDown className="w-3 h-3" />}
                   <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-                </button>
-                
+                </a>
+
                 {/* Submenu */}
                 <AnimatePresence>
                   {link.submenu && activeSubmenu === link.label && (
@@ -90,13 +112,13 @@ export function Navbar() {
                       className="absolute top-full left-0 mt-2 w-48 glass-card p-2"
                     >
                       {link.submenu.map((subItem) => (
-                        <button
+                        <a
                           key={subItem.label}
-                          onClick={() => scrollToSection(subItem.href)}
+                          href={subItem.href}
                           className="block w-full text-left px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-primary/10 rounded-md transition-colors"
                         >
                           {subItem.label}
-                        </button>
+                        </a>
                       ))}
                     </motion.div>
                   )}
@@ -107,13 +129,13 @@ export function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Button 
-              onClick={() => scrollToSection('#pricing')}
+            <Button
               className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-[var(--shadow-button)] glow-effect"
             >
               Join Now
             </Button>
           </div>
+
 
           {/* Mobile Menu Button */}
           <button
@@ -158,7 +180,7 @@ export function Navbar() {
                   </div>
                 ))}
                 <div className="px-4 pt-2">
-                  <Button 
+                  <Button
                     onClick={() => scrollToSection('#pricing')}
                     className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold glow-effect"
                   >
@@ -170,6 +192,7 @@ export function Navbar() {
           )}
         </AnimatePresence>
       </div>
+      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
     </motion.nav>
   );
 }

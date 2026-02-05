@@ -114,8 +114,8 @@ export default {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'hero-pattern': 'radial-gradient(ellipse 80% 50% at 50% -20%, hsl(142 76% 46% / 0.08), transparent)',
-        'grid-pattern': 'linear-gradient(hsl(142 76% 46% / 0.03) 1px, transparent 1px), linear-gradient(90deg, hsl(142 76% 46% / 0.03) 1px, transparent 1px)',
+        'hero-pattern': 'radial-gradient(ellipse 80% 50% at 50% -20%, hsl(270 70% 60% / 0.12), transparent)',
+        'grid-pattern': 'linear-gradient(hsl(270 70% 60% / 0.04) 1px, transparent 1px), linear-gradient(90deg, hsl(270 70% 60% / 0.04) 1px, transparent 1px)',
       },
     },
   },

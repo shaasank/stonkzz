@@ -64,7 +64,7 @@ export function HowItWorksSection() {
               {index < steps.length - 1 && (
                 <div className="hidden md:block absolute top-20 left-[60%] w-[80%] h-[2px]">
                   <div className="h-full bg-gradient-to-r from-primary/50 to-transparent" />
-                  <motion.div 
+                  <motion.div
                     className="absolute top-0 left-0 h-full w-8 bg-gradient-to-r from-primary to-transparent"
                     animate={{ x: ['0%', '1000%', '0%'] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
@@ -72,7 +72,7 @@ export function HowItWorksSection() {
                 </div>
               )}
 
-              <div className="glass-card-hover p-6 text-center h-full">
+              <div className="glass-card p-6 text-center h-full">
                 {/* Icon */}
                 <div className="relative mb-6">
                   <div className="w-20 h-20 mx-auto rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:border-primary/40 transition-colors">

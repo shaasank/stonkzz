@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/lib/supabase';
@@ -11,31 +12,22 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import logo from '@/assets/stonkz-logo.svg';
 
 const navLinks = [
-  { label: 'AI Analysis', href: '/ai' },
-  { label: 'How it Works', href: '#how-it-works' },
-  { label: 'Features', href: '#features' },
-  { label: 'Testimonials', href: '#testimonials' },
-  { label: 'Pricing', href: '#pricing' },
-  {
-    label: 'Courses',
-    href: '#courses',
-    submenu: [
-      { label: 'Stock Market Basics', href: '#courses' },
-      { label: 'Technical Analysis', href: '#courses' },
-      { label: 'Options Trading', href: '#courses' },
-    ]
-  },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'How it Works', href: 'how-it-works' },
+  { label: 'Features', href: 'features' },
+  { label: 'Courses', href: 'courses' },
+  { label: 'Pricing', href: 'pricing' },
+  { label: 'Contact', href: 'contact' },
 ];
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // Auth temporarily disabled per user request
   // const [user, setUser] = useState<User | null>(null);
@@ -57,141 +49,134 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
+  const scrollToSection = (sectionId: string) => {
+    if (location.pathname !== '/') {
+      navigate(`/?scrollTo=${sectionId}`);
+      return;
+    }
+
+    const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+      setIsMobileMenuOpen(false);
     }
-    setIsMobileMenuOpen(false);
   };
 
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-        ? 'bg-background/90 backdrop-blur-xl border-b border-border/50'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+        ? 'bg-black/70 backdrop-blur-xl border-b border-white/5'
         : 'bg-transparent'
         }`}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+      <div className="container mx-auto px-6 lg:px-20">
+        <div className={`flex items-center justify-between transition-all duration-300 ${isScrolled ? 'h-14' : 'h-16 lg:h-20'}`}>
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:border-primary/50 transition-colors">
-              <TrendingUp className="w-5 h-5 text-primary" />
-            </div>
-            <span className="font-display font-bold text-xl hidden sm:block">Stonkzz</span>
-          </a>
+          <button onClick={() => scrollToSection('hero')} className="flex items-center gap-2 group shrink-0">
+            <img
+              src={logo}
+              alt="Stonkzz Logo"
+              className="h-7 lg:h-8 w-auto filter brightness-0 invert opacity-90 transition-opacity hover:opacity-100"
+            />
+          </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-8 xl:gap-12">
             {navLinks.map((link) => (
-              <div
+              <motion.button
                 key={link.label}
-                className="relative"
-                onMouseEnter={() => link.submenu && setActiveSubmenu(link.label)}
-                onMouseLeave={() => setActiveSubmenu(null)}
+                onClick={() => scrollToSection(link.href)}
+                initial="initial"
+                whileHover="hover"
+                className="relative text-[13px] font-medium text-white/70 hover:text-white transition-all duration-200 opacity-80 hover:opacity-100 py-1"
               >
-                <a
-                  href={link.href}
-                  className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1 relative group"
+                <motion.span
+                  variants={{
+                    initial: { textShadow: "0 0 0px rgba(168, 85, 247, 0)", scale: 1 },
+                    hover: { textShadow: "0 0 8px rgb(168, 85, 247)", scale: 1.05 }
+                  }}
                 >
                   {link.label}
-                  {link.submenu && <ChevronDown className="w-3 h-3" />}
-                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-                </a>
-
-                {/* Submenu */}
-                <AnimatePresence>
-                  {link.submenu && activeSubmenu === link.label && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      className="absolute top-full left-0 mt-2 w-48 glass-card p-2"
-                    >
-                      {link.submenu.map((subItem) => (
-                        <a
-                          key={subItem.label}
-                          href={subItem.href}
-                          className="block w-full text-left px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-primary/10 rounded-md transition-colors"
-                        >
-                          {subItem.label}
-                        </a>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+                </motion.span>
+                <motion.div
+                  variants={{
+                    initial: { width: "0%", opacity: 0 },
+                    hover: { width: "100%", opacity: 1 }
+                  }}
+                  className="absolute bottom-0 left-0 h-[2px] bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.8)]"
+                />
+              </motion.button>
             ))}
           </div>
 
           {/* CTA Button */}
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex items-center gap-4">
             <Button
-              className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-[var(--shadow-button)] glow-effect"
+              onClick={() => setIsAuthModalOpen(true)}
+              className="bg-white text-black hover:bg-white/90 px-5 h-8 rounded-full text-xs font-semibold transition-all hover:scale-105 active:scale-95"
             >
-              Join Now
+              Join Stonkzz
             </Button>
           </div>
-
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-foreground hover:text-primary transition-colors"
+            className="lg:hidden p-2 text-white/70 hover:text-white transition-colors"
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
+      </div>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden overflow-hidden"
-            >
-              <div className="py-4 space-y-2 border-t border-border/50">
-                {navLinks.map((link) => (
-                  <div key={link.label}>
-                    <button
-                      onClick={() => scrollToSection(link.href)}
-                      className="block w-full text-left px-4 py-3 text-muted-foreground hover:text-foreground hover:bg-primary/10 rounded-lg transition-colors"
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 top-[60px] bg-black z-40 lg:hidden px-10 pt-10"
+          >
+            <div className="flex flex-col space-y-6">
+              {navLinks.map((link) => (
+                <div key={link.label} className="border-b border-white/5 pb-4">
+                  <motion.button
+                    onClick={() => scrollToSection(link.href)}
+                    initial="initial"
+                    whileHover="hover"
+                    className="relative text-2xl font-semibold text-white/90 hover:text-white transition-all duration-200 w-full text-left py-1"
+                  >
+                    <motion.span
+                      variants={{
+                        initial: { textShadow: "0 0 0px rgba(168, 85, 247, 0)", scale: 1 },
+                        hover: { textShadow: "0 0 8px rgb(168, 85, 247)", scale: 1.02 }
+                      }}
                     >
                       {link.label}
-                    </button>
-                    {link.submenu && (
-                      <div className="pl-6 space-y-1">
-                        {link.submenu.map((subItem) => (
-                          <button
-                            key={subItem.label}
-                            onClick={() => scrollToSection(subItem.href)}
-                            className="block w-full text-left px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                          >
-                            {subItem.label}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-                <div className="px-4 pt-2">
-                  <Button
-                    onClick={() => scrollToSection('#pricing')}
-                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold glow-effect"
-                  >
-                    Join Now
-                  </Button>
+                    </motion.span>
+                    <motion.div
+                      variants={{
+                        initial: { width: "0%", opacity: 0 },
+                        hover: { width: "100%", opacity: 1 }
+                      }}
+                      className="absolute bottom-0 left-0 h-[3px] bg-purple-500 shadow-[0_0_12px_rgba(168,85,247,0.8)]"
+                    />
+                  </motion.button>
                 </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+              ))}
+              <Button
+                onClick={() => setIsAuthModalOpen(true)}
+                className="w-full bg-white text-black h-12 rounded-full font-bold text-lg mt-8"
+              >
+                Get Started
+              </Button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
     </motion.nav>
   );

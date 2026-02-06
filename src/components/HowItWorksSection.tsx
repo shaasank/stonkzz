@@ -1,111 +1,129 @@
 import { motion } from 'framer-motion';
-import { Clock, Database, Brain, Send, CheckCircle } from 'lucide-react';
+import { Search, PenTool, Zap, TrendingUp, Clock, CheckCircle } from 'lucide-react';
 
 const steps = [
   {
-    number: '01',
-    title: 'Data Collection',
-    description: 'We collect real-time data from 50+ trusted sources including NSE, BSE, RBI, and financial news outlets.',
-    icon: Database,
+    number: '1',
+    title: 'Exploration',
+    description: 'We dive deep into 50+ trusted sources including NSE, BSE, and global news to capture every market heartbeat.',
+    icon: Search,
   },
   {
-    number: '02',
-    title: 'AI Analysis',
-    description: 'Our AI-powered system analyzes and compiles data into beautiful, easy-to-read visual reports every morning.',
-    icon: Brain,
+    number: '2',
+    title: 'Strategic Synthesis',
+    description: 'Our AI engines process massive datasets to identify high-conviction trends and actionable stock insights.',
+    icon: PenTool,
   },
   {
-    number: '03',
-    title: 'Instant Delivery',
-    description: 'Get insights as a PDF report delivered directly to your WhatsApp daily.',
-    icon: Send,
+    number: '3',
+    title: 'Precision Implementation',
+    description: 'Data is transformed into beautiful, institutional-grade visual reports that are easy to digest.',
+    icon: Zap,
+  },
+  {
+    number: '4',
+    title: 'Impactful Results',
+    description: 'Every morning at 8:00 AM IST, your personalized PDF arrives on WhatsApp, ready for the market open.',
+    icon: TrendingUp,
   },
 ];
 
 export function HowItWorksSection() {
   return (
-    <section id="how-it-works" className="py-24 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
-      <div className="absolute inset-0 grid-pattern opacity-30" />
+    <section id="how-it-works" className="py-24 relative overflow-hidden bg-black">
+      {/* Background visual elements */}
+      <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-purple-500/10 to-transparent" />
+      <div className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-transparent via-purple-500/10 to-transparent" />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4">
-            <CheckCircle className="w-4 h-4 text-primary" />
-            <span className="text-sm text-primary font-medium">Simple Process</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 mb-6 font-mono text-[10px] tracking-[0.2em] uppercase text-purple-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
+            Our Protocol
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-4">
-            How It <span className="gradient-text">Works</span>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6">
+            It's not as chaotic <br /> as you <span className="text-purple-500 italic">think.</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            From data collection to delivery, we've streamlined the entire process to give you the most accurate and timely market insights.
+          <p className="text-white/40 max-w-2xl text-lg font-medium leading-relaxed">
+            We've distilled complex market analysis into a razor-sharp 4-step execution model.
           </p>
         </motion.div>
 
-        {/* Steps */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-12">
+        {/* Steps Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {steps.map((step, index) => (
             <motion.div
               key={step.number}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.15 }}
-              className="relative"
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              className="group relative"
             >
-              {/* Connector Line */}
-              {index < steps.length - 1 && (
-                <div className="hidden md:block absolute top-20 left-[60%] w-[80%] h-[2px]">
-                  <div className="h-full bg-gradient-to-r from-primary/50 to-transparent" />
-                  <motion.div
-                    className="absolute top-0 left-0 h-full w-8 bg-gradient-to-r from-primary to-transparent"
-                    animate={{ x: ['0%', '1000%', '0%'] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                  />
-                </div>
-              )}
+              <div className="glass-card p-8 h-full flex flex-col items-start border-white/5 hover:border-purple-500/30 transition-all duration-500">
+                {/* Large Background Number */}
+                <span className="absolute top-4 right-6 text-9xl font-bold text-white/[0.02] select-none transition-colors group-hover:text-purple-500/[0.05]">
+                  {step.number}
+                </span>
 
-              <div className="glass-card p-6 text-center h-full">
-                {/* Icon */}
-                <div className="relative mb-6">
-                  <div className="w-20 h-20 mx-auto rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:border-primary/40 transition-colors">
-                    <step.icon className="w-10 h-10 text-primary" />
-                  </div>
-                  <span className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-bold flex items-center justify-center shadow-lg">
-                    {step.number}
-                  </span>
+                <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-8 border border-purple-500/20 group-hover:bg-purple-500 group-hover:text-black transition-all duration-500">
+                  <step.icon className="w-6 h-6" />
                 </div>
 
-                <h3 className="text-xl font-display font-semibold mb-3">{step.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{step.description}</p>
+                <h3 className="text-xl font-bold text-white mb-4 tracking-tight group-hover:text-purple-400 transition-colors">
+                  {step.title}
+                </h3>
+                <p className="text-white/40 text-sm leading-relaxed font-medium group-hover:text-white/60 transition-colors">
+                  {step.description}
+                </p>
+
+                {/* Bottom Line Decoration */}
+                <div className="mt-auto pt-8 w-full">
+                  <div className="h-px w-0 bg-purple-500/50 group-hover:w-full transition-all duration-700" />
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Time Badge */}
+        {/* Closing Stat / Info */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="max-w-md mx-auto"
+          transition={{ delay: 0.6 }}
+          className="mt-20 flex flex-col sm:flex-row items-center gap-8 justify-between p-8 rounded-3xl border border-white/5 bg-white/[0.01]"
         >
-          <div className="glass-card p-6 text-center border-primary/30 animate-border-glow">
-            <div className="flex items-center justify-center gap-3 mb-2">
-              <Clock className="w-6 h-6 text-primary" />
-              <h4 className="text-lg font-display font-semibold">Updated Daily at 8:00 AM IST</h4>
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full border border-purple-500/20 flex items-center justify-center text-purple-500">
+              <Clock className="w-6 h-6" />
             </div>
-            <p className="text-muted-foreground text-sm">
-              Get fresh insights every morning before market opens. Never miss important market movements again.
-            </p>
+            <div>
+              <p className="text-sm font-mono text-purple-400 tracking-wider">UP-TIME GUARANTEED</p>
+              <p className="text-white font-bold text-lg">Daily Briefing at 08:00 AM IST</p>
+            </div>
           </div>
+
+          <div className="flex -space-x-3">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="w-10 h-10 rounded-full border-2 border-black bg-purple-900/40 backdrop-blur-sm flex items-center justify-center text-[10px] font-bold">
+                U{i}
+              </div>
+            ))}
+            <div className="w-10 h-10 rounded-full border-2 border-black bg-white/5 backdrop-blur-sm flex items-center justify-center text-[10px] font-bold">
+              +2k
+            </div>
+          </div>
+
+          <p className="text-white/40 text-sm font-medium">
+            Join <span className="text-white">2,400+</span> traders already optimized.
+          </p>
         </motion.div>
       </div>
     </section>

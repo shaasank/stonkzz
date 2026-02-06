@@ -39,10 +39,7 @@ const plans = [
 
 export function PricingSection() {
   return (
-    <section id="pricing" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-hero-pattern opacity-30" />
-      <div className="absolute inset-0 grid-pattern opacity-20" />
-
+    <section id="pricing" className="py-24 relative overflow-hidden bg-black">
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <motion.div
@@ -72,9 +69,8 @@ export function PricingSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`relative glass-card p-6 transition-all duration-500 hover:-translate-y-2 ${
-                plan.popular ? 'border-primary ring-2 ring-primary/20 shadow-[var(--shadow-glow)]' : 'hover:border-primary/30'
-              }`}
+              className={`relative glass-card p-6 transition-all duration-500 hover:-translate-y-2 ${plan.popular ? 'border-primary ring-2 ring-primary/20 shadow-[var(--shadow-glow)]' : 'hover:border-primary/30'
+                }`}
             >
               {/* Popular Badge */}
               {plan.popular && (
@@ -119,11 +115,10 @@ export function PricingSection() {
                 )}
 
                 <Button
-                  className={`w-full ${
-                    plan.popular
+                  className={`w-full ${plan.popular
                       ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-[var(--shadow-button)] glow-effect'
                       : 'bg-secondary hover:bg-secondary/80 text-foreground hover:border-primary/50'
-                  } font-semibold transition-all duration-300`}
+                    } font-semibold transition-all duration-300`}
                 >
                   Get {plan.name} Plan
                 </Button>

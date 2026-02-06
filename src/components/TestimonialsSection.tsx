@@ -69,10 +69,7 @@ export function TestimonialsSection() {
   const allTestimonials = [...testimonials, ...testimonials];
 
   return (
-    <section id="testimonials" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
-      <div className="absolute inset-0 grid-pattern opacity-20" />
-
+    <section id="testimonials" className="py-24 relative overflow-hidden bg-black">
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <motion.div

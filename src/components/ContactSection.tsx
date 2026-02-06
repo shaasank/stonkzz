@@ -27,10 +27,7 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-hero-pattern opacity-30" />
-      <div className="absolute inset-0 grid-pattern opacity-20" />
-
+    <section id="contact" className="py-24 relative overflow-hidden bg-black">
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <motion.div

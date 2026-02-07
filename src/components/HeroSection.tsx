@@ -7,7 +7,7 @@ import { MarqueeStocks } from './MarqueeStocks';
 import logo from '@/assets/STONKZZ.svg';
 import prasanaImg from '@/assets/prasana.svg';
 
-function CountUp({ to, duration = 2, suffix = "" }: { to: number; duration?: number; suffix?: string }) {
+function CountUp({ to, duration = 4, suffix = "" }: { to: number; duration?: number; suffix?: string }) {
     const [displayValue, setDisplayValue] = useState("0");
     const count = useMotionValue(0);
 
@@ -49,20 +49,27 @@ export function HeroSection() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                    className="max-w-4xl mx-auto flex flex-col items-center"
+                    className="max-w-7xl mx-auto flex flex-col items-center"
                 >
                     {/* Brand Logo - Center Content with High Contrast */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1, delay: 0.2 }}
-                        className="mb-10 relative"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{
+                            opacity: 1,
+                            scale: 1
+                        }}
+                        transition={{
+                            duration: 1,
+                            delay: 0.2
+                        }}
+                        className="mb-14 relative group"
                     >
-                        {/* High Contrast Glow */}
-                        <div className="absolute inset-0 bg-white/10 blur-[60px] rounded-full" />
+                        {/* High Contrast Glow Layers */}
+                        <div className="absolute inset-0 bg-purple-500/20 blur-[100px] rounded-full animate-pulse transition-all duration-1000 group-hover:bg-purple-500/30" />
+                        <div className="absolute inset-0 bg-white/5 blur-[40px] rounded-full" />
 
                         <div
-                            className="relative w-72 sm:w-96 h-16 sm:h-24 bg-white"
+                            className="relative w-[650px] max-w-full sm:w-[1200px] h-[200px] sm:h-[320px] bg-white transition-all duration-500"
                             style={{
                                 maskImage: `url(${logo})`,
                                 WebkitMaskImage: `url(${logo})`,
@@ -72,37 +79,37 @@ export function HeroSection() {
                                 WebkitMaskRepeat: 'no-repeat',
                                 maskPosition: 'center',
                                 WebkitMaskPosition: 'center',
-                                filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.2))',
+                                filter: 'drop-shadow(0 0 30px rgba(168, 85, 247, 0.4)) drop-shadow(0 0 60px rgba(255, 255, 255, 0.1))',
                             }}
                         />
                     </motion.div>
 
                     {/* Headline */}
-                    <div className="space-y-2 mb-8">
+                    <div className="space-y-3 mb-12 text-center">
                         <motion.h1
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
-                            className="text-6xl sm:text-7xl lg:text-8xl font-black tracking-tight text-white"
+                            className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tighter text-white"
                         >
-                            The power of AI.
+                            AI-Powered Analysis.
                         </motion.h1>
                         <motion.h1
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.5 }}
-                            className="text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-white/40"
+                            className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tighter text-white/30"
                         >
-                            In your pocket.
+                            Smarter Investing.
                         </motion.h1>
 
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.6 }}
-                            className="text-xl sm:text-2xl text-white/50 max-w-2xl mx-auto font-medium mt-8"
+                            className="text-base sm:text-lg text-white/40 max-w-xl mx-auto font-medium mt-6 leading-relaxed"
                         >
-                            Professional-grade market analysis for serious investors.
+                            Unlock institutional-grade market insights instantly.
                         </motion.p>
                     </div>
 
@@ -144,16 +151,13 @@ export function HeroSection() {
                             transition={{ duration: 1, delay: 0.9 }}
                             className="flex flex-wrap justify-center gap-6 lg:gap-10 border-t border-white/10 pt-8"
                         >
-                            <div className="flex items-center gap-2 text-white/30 font-medium text-sm sm:text-base">
-                                <CheckCircle2 className="w-5 h-5 text-emerald-500/50" />
+                            <div className="flex items-center gap-2 text-purple-400 font-bold text-base sm:text-lg">
                                 Used by <CountUp to={2000} suffix="+" /> investors
                             </div>
-                            <div className="flex items-center gap-2 text-white/30 font-medium text-sm sm:text-base">
-                                <CheckCircle2 className="w-5 h-5 text-emerald-500/50" />
+                            <div className="flex items-center gap-2 text-purple-400 font-bold text-base sm:text-lg">
                                 <CountUp to={100} suffix="%" /> data powered
                             </div>
-                            <div className="flex items-center gap-2 text-white/30 font-medium text-sm sm:text-base">
-                                <CheckCircle2 className="w-5 h-5 text-emerald-500/50" />
+                            <div className="flex items-center gap-2 text-purple-400 font-bold text-base sm:text-lg">
                                 <CountUp to={50} suffix="+" /> AI-backed insights
                             </div>
                         </motion.div>

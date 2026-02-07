@@ -72,13 +72,13 @@ export function Navbar() {
         }`}
     >
       <div className="container mx-auto px-6 lg:px-20">
-        <div className={`flex items-center justify-between transition-all duration-300 ${isScrolled ? 'h-14' : 'h-16 lg:h-20'}`}>
+        <div className={`flex items-center justify-between transition-all duration-300 ${isScrolled ? 'h-16' : 'h-20 lg:h-24'}`}>
           {/* Logo */}
           <button onClick={() => scrollToSection('hero')} className="flex items-center gap-2 group shrink-0">
             <img
               src={logo}
               alt="Stonkzz Logo"
-              className="h-7 lg:h-8 w-auto filter brightness-0 invert opacity-90 transition-opacity hover:opacity-100"
+              className="h-9 lg:h-10 w-auto filter brightness-0 invert opacity-90 transition-opacity hover:opacity-100"
             />
           </button>
 
@@ -90,7 +90,7 @@ export function Navbar() {
                 onClick={() => scrollToSection(link.href)}
                 initial="initial"
                 whileHover="hover"
-                className="relative text-[13px] font-medium text-white/70 hover:text-white transition-all duration-200 opacity-80 hover:opacity-100 py-1"
+                className="relative text-[15px] font-medium text-white/70 hover:text-white transition-all duration-200 opacity-80 hover:opacity-100 py-1"
               >
                 <motion.span
                   variants={{
@@ -115,7 +115,7 @@ export function Navbar() {
           <div className="hidden lg:flex items-center gap-4">
             <Button
               onClick={() => setIsAuthModalOpen(true)}
-              className="bg-white text-black hover:bg-white/90 px-5 h-8 rounded-full text-xs font-semibold transition-all hover:scale-105 active:scale-95"
+              className="bg-white text-black hover:bg-white/90 px-7 h-10 rounded-full text-sm font-semibold transition-all hover:scale-105 active:scale-95"
             >
               Join Stonkzz
             </Button>
